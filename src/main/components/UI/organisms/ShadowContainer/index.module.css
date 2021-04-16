@@ -1,0 +1,8 @@
+.shdCont {
+    --shd-height: 19.625rem;
+    --shd-width: calc(min(32.5rem, 95%));
+    height: var(--shd-height);
+    width: var(--shd-width);
+    box-shadow: 0px 30px 60px var(--color-kashmir-blue20);
+    border-radius: var(--app-br);
+}

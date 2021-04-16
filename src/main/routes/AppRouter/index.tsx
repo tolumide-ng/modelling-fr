@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, withRouter } from "react-router";
 import ErrorBoundary from "../../components/Pages/ErrorBoundary";
-import { LandingPage } from "../../components/Pages/LandingPage";
+import { HomePage } from "../../components/Pages/Home";
 import { LoadingPage } from "../../components/Pages/LoadingPage";
 // import { NotFoundPage } from "../../components/Pages/NotFoundPage";
 import { setDropDownAction } from "../../store/modules/dropDown/actions";
@@ -29,7 +29,7 @@ const AppRouter = withRouter(() => {
                     <Suspense fallback={<LoadingPage />}>
                         <Switch>
                             <Route path="/" exact>
-                                <LandingPage />
+                                <HomePage />
                             </Route>
                             {/* <Route path="/">
                                 <NotFoundPage />
