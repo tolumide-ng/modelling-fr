@@ -17,7 +17,7 @@
   "dependencies": {
     "@stripe/stripe-js": "^1.11.0",
     "@types/react-router": "^5.1.8",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "compression": "^1.7.4",
     "css-loader": "^4.2.1",
     "date-fns": "^2.15.0",
@@ -47,7 +47,6 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.3",
     "@testing-library/react": "^10.4.8",
-    "@types/axios": "^0.14.0",
     "@types/dotenv-webpack": "^1.8.0",
     "@types/jest": "^26.0.10",
     "@types/jsonwebtoken": "^8.5.0",
