@@ -25,18 +25,17 @@ module.exports = {
                     },
                     "sass-loader",
                 ],
+                include: /\.module\.css$/,
             },
             {
                 test: /\.(css|scss|sass)/i,
                 use: [
                     MiniCssExtractPlugin.loader,
                     // "style-loader",
-                    {
-                        loader: "css-loader",
-                        options: { importLoaders: 1, modules: true },
-                    },
-                    "sass-loader",n
+                    "css-loader",
+                    "sass-loader",
                 ],
+                exclude: /\.module\.css$/,
             },
         ],
     },

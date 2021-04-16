@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --init",
-    "start": "node server.js",
+    "start": "serve -s dist",
     "dev": "webpack-dev-server --hot --env.mode=development --open --port 5000",
     "build": "rm -rf ./dist && webpack --env.mode production",
     "test": "jest",
@@ -41,12 +41,14 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^9.0.3",
+    "serve": "^11.3.2",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^4.1.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.3",
     "@testing-library/react": "^10.4.8",
+    "@types/axios": "^0.14.0",
     "@types/dotenv-webpack": "^1.8.0",
     "@types/jest": "^26.0.10",
     "@types/jsonwebtoken": "^8.5.0",
