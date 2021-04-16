@@ -1,6 +1,6 @@
 import * as React from "react";
 import { NotFoundPage } from "../NotFoundPage";
-import "./index.css";
+import styles from "./index.module.css";
 
 interface ComponentState {
     hasError: boolean;

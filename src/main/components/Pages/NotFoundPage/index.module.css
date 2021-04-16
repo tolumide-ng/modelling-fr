@@ -6,20 +6,20 @@
     align-items: center;
 }
 
-.notfd-cont {
+.notfdCont {
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
 }
 
-.notfd-title {
+.notfdTitle {
     color: var(--app-default-color);
     font-size: 10rem;
     margin-block-end: 0;
 }
 
-.notfd-description {
+.notfdDescription {
     font-size: 4rem;
     text-transform: capitalize;
     text-align: center;

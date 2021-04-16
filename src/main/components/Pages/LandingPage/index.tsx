@@ -1,12 +1,12 @@
 import * as React from "react";
-import "./index.css";
+import styles from "./index.module.css";
 
 export const LandingPage = () => {
     return (
-        <article className="ldpg">
-            <article className="ldpg-cont">
-                <article className="ldpg-left"></article>
-                <article className="ldpg-right"></article>
+        <article className={styles.ldpg}>
+            <article className={styles.ldpgCont}>
+                <article className={styles.ldpgLeft}></article>
+                <article className={styles.ldpgRight}></article>
             </article>
         </article>
     );
