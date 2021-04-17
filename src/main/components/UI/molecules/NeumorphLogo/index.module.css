@@ -1,0 +1,26 @@
+.neu {
+    transition: all 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.newImg {
+    margin-bottom: var(--app-new-mb);
+    transition: all 0.3s ease-out;
+}
+
+.neuTop {
+    margin-top: 2.65625rem;
+}
+
+.neuName {
+    font-family: wSansSemiBold;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    text-align: center;
+    color: var(--color-san-juan);
+}

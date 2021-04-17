@@ -1,9 +1,8 @@
 .drpFile {
-    --drp-br: 0.5rem;
     height: 100%;
     width: 100%;
     border: 2px dashed var(--color-geyser);
-    border-radius: var(--drp-br);
+    border-radius: var(--app-br-mid);
     transition: all 0.3s ease-out;
 }
 
@@ -42,6 +41,7 @@
     cursor: pointer;
     border: none;
     background-color: transparent;
+    margin-left: 0.4rem;
 }
 
 .drpComment {
@@ -52,4 +52,8 @@
     font-weight: 500;
     line-height: 1rem;
     font-family: wSansMedium;
+}
+
+.drpCommentP {
+    text-align: center;
 }
