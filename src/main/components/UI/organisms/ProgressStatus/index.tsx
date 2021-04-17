@@ -31,7 +31,14 @@ export const ProgressStatus = (props: ProgressStatusDef) => {
                 <div className={styles.upsUploading}>
                     <p className={styles.upsLoading}>{props.progressText}</p>
 
-                    <div className={styles.upsStatus} ref={progressRef}></div>
+                    <div
+                        className={styles.upsStatus}
+                        ref={progressRef}
+                        role="progressbar"
+                        aria-valuenow={props.progressPercentage}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                    ></div>
                 </div>
             ) : (
                 <div className={styles.upsSuccessText}>{props.successText}</div>

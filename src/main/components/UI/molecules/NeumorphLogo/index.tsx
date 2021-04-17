@@ -10,6 +10,7 @@ interface NeumorphLogoDef {
 export const NeumorphLogo = (props: NeumorphLogoDef) => {
     return (
         <div
+            aria-label={props.fileName ? "log and file name" : "logo"}
             className={
                 props.removeMargin
                     ? styles.neu

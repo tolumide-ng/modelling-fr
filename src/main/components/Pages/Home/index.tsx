@@ -8,25 +8,60 @@ import { UploadFile } from "../../UI/organisms/UploadFile";
 import styles from "./index.module.css";
 
 interface displayCompsDef {
-    [key: number]: () => JSX.Element;
+    [key: number]: () => { component: JSX.Element; description: string };
 }
 
 export const HomePage = () => {
-    const [current, setCurrent] = React.useState(5);
+    const [current, setCurrent] = React.useState(1);
     const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
 
     const displayComps: displayCompsDef = {
-        1: () => <DropFile changeScreen={setCurrent} changeFile={setTheFile} />,
-        2: () => <UploadFile fileName={theFile?.name ?? ""} />,
-        3: () => <SelectConversion />,
-        4: () => <ConvertProgress />,
-        5: () => <DownloadFile />,
+        1: () => {
+            return {
+                component: (
+                    <DropFile
+                        changeScreen={setCurrent}
+                        changeFile={setTheFile}
+                    />
+                ),
+                description:
+                    "Step 1: Drag and Drop file or click browse to convert a .shapr file",
+            };
+        },
+        2: () => {
+            return {
+                component: <UploadFile fileName={theFile?.name ?? ""} />,
+                description: "Step 2: Upload File",
+            };
+        },
+        3: () => {
+            return {
+                component: <SelectConversion />,
+                description: "Step 3: Select conversion target",
+            };
+        },
+        4: () => {
+            return {
+                component: <ConvertProgress />,
+                description: "Step 4: Converting file...",
+            };
+        },
+        5: () => {
+            return {
+                component: <DownloadFile />,
+                description: "Step 5: Download File",
+            };
+        },
     };
 
     return (
-        <article className={styles.ldpg}>
+        <article
+            className={styles.ldpg}
+            aria-valuetext={displayComps[current]().description}
+            aria-valuenow={current}
+        >
             <ShadowContainer
-                childContent={displayComps[current]()}
+                childContent={displayComps[current]().component}
                 current={current}
             />
         </article>
