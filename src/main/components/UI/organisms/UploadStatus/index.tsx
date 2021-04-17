@@ -3,6 +3,7 @@ import styles from "./index.module.css";
 
 interface UploadStatusDef {
     successText: string;
+    progressText: string;
 }
 
 export const UploadStatus = (props: UploadStatusDef) => {
@@ -17,7 +18,7 @@ export const UploadStatus = (props: UploadStatusDef) => {
         >
             {uploadState < 100 ? (
                 <div className={styles.upsUploading}>
-                    <p className={styles.upsLoading}>Uploading...</p>
+                    <p className={styles.upsLoading}>{props.progressText}</p>
 
                     <div className={styles.upsStatus}></div>
                 </div>

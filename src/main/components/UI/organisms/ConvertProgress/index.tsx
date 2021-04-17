@@ -3,19 +3,15 @@ import { ConvertTemplate } from "../../template/ConvertTemplate";
 import { UploadStatus } from "../UploadStatus";
 import styles from "./index.module.css";
 
-interface UploadFileDef {
-    fileName: string;
-}
-
-export const UploadFile = (props: UploadFileDef) => {
+export const ConvertProgress = () => {
     return (
         <ConvertTemplate
-            fileName={props.fileName || "tolumide_drone.shapr"}
+            fileName=""
             childComp={
-                <div className={styles.upfStatus}>
+                <div className={styles.cvtProgStatus}>
                     <UploadStatus
-                        successText="Upload successful"
-                        progressText="Uploading..."
+                        successText="Successful"
+                        progressText="Converting to STEP"
                     />
                 </div>
             }
