@@ -1,11 +1,12 @@
 import * as React from "react";
 import { confirmSize } from "../../../../utilities/helpers/files";
 import { Button } from "../../atoms/Button";
-import { NeuMorphLogo } from "../../atoms/NeumorphLogo";
+import { NeumorphLogo } from "../../molecules/NeumorphLogo";
 import styles from "./index.module.css";
 
 interface DropFileProps {
     changeScreen: React.Dispatch<React.SetStateAction<number>>;
+    changeFile: React.Dispatch<React.SetStateAction<File | undefined>>;
 }
 
 export const DropFile = (props: DropFileProps) => {
@@ -13,7 +14,6 @@ export const DropFile = (props: DropFileProps) => {
     const fileSelect = React.useRef<HTMLButtonElement>(null);
     const formElem = React.useRef<HTMLDivElement>(null);
 
-    const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
     const [fileError, setFileError] = React.useState("");
 
     const handleAcceptUpload = (e: React.ChangeEvent) => {
@@ -25,7 +25,7 @@ export const DropFile = (props: DropFileProps) => {
             setFileError("");
             try {
                 if (confirmSize(file.size)) {
-                    setTheFile(file);
+                    props.changeFile(file);
                 }
             } catch (error) {
                 setFileError(error);
@@ -65,7 +65,7 @@ export const DropFile = (props: DropFileProps) => {
 
                     reader.readAsDataURL(uploadedFile);
 
-                    setTheFile(uploadedFile);
+                    props.changeFile(uploadedFile);
                 }
             } catch (error) {
                 setFileError(error);
@@ -90,7 +90,7 @@ export const DropFile = (props: DropFileProps) => {
                     onDragExit={handleDragEnd}
                     ref={formElem}
                 >
-                    <NeuMorphLogo />
+                    <NeumorphLogo removeMargin={true} />
                     <div className={styles.drpFileText}>
                         Drop your .shapr file here, or
                         <input
@@ -108,7 +108,7 @@ export const DropFile = (props: DropFileProps) => {
                             ref={fileSelect}
                         />
                     </div>
-                    <p>
+                    <p className={styles.drpCommentP}>
                         <small className={styles.drpComment}>
                             Supports: .STEP, .STL and .IGES
                         </small>

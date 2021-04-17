@@ -1,0 +1,57 @@
+:root {
+    --progress: 0.5%;
+}
+
+.ups {
+    height: var(--app-input-height);
+    width: 100%;
+    border-radius: var(--app-br-mid);
+    padding: 0 0.5rem;
+}
+
+.upsRegular {
+    background-color: var(--color-polar);
+}
+
+.upsSuccess {
+    background-color: var(--color-hint-green);
+}
+
+.upsLoading {
+    padding-left: 0.125rem;
+    font-size: 0.75rem;
+    font-family: wSansMedium;
+    line-height: 1.5rem;
+    letter-spacing: 0.003em;
+    color: var(--color-san-juan);
+    font-weight: 600;
+}
+
+.upsUploading {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.upsStatus {
+    background-color: var(--color-azure-radiance);
+    height: 0.125rem;
+    /* width: 0.5%; */
+    width: var(--progress);
+    margin-bottom: 0.75rem;
+    opacity: 0.68;
+}
+
+.upsSuccessText {
+    font-family: wSansSemiBold;
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.003em;
+    color: var(--color-san-juan);
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
