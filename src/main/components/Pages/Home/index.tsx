@@ -12,7 +12,7 @@ interface displayCompsDef {
 }
 
 export const HomePage = () => {
-    const [current, setCurrent] = React.useState(1);
+    const [current, setCurrent] = React.useState(4);
     const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
     const [fileName, setFileName] = React.useState<undefined | string>(
         undefined

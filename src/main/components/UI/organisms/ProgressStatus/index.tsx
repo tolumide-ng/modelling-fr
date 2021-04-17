@@ -21,6 +21,8 @@ export const ProgressStatus = (props: ProgressStatusDef) => {
 
     return (
         <div
+            aria-label="progress status"
+            role="progress status"
             className={
                 props.progressPercentage >= 100
                     ? `${styles.ups} ${styles.upsSuccess}`

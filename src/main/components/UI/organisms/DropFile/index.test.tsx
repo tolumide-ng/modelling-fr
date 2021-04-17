@@ -7,6 +7,8 @@ describe("Drop File Component", () => {
     test("Drag and drop event is emitted when a file is dropped", async () => {
         const changeFile = jest.fn();
 
+        // Big Thanks to: https://github.com/testing-library/react-testing-library/issues/339#issuecomment-526310225
+
         const { getByText } = render(
             <DropFile changeFile={changeFile} changeScreen={() => {}} />
         );
