@@ -4,7 +4,11 @@ import { Button } from "../../atoms/Button";
 import { NeuMorphLogo } from "../../atoms/NeumorphLogo";
 import styles from "./index.module.css";
 
-export const DropFile = () => {
+interface DropFileProps {
+    changeScreen: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export const DropFile = (props: DropFileProps) => {
     const fileElem = React.useRef<HTMLInputElement>(null);
     const fileSelect = React.useRef<HTMLButtonElement>(null);
     const formElem = React.useRef<HTMLDivElement>(null);
@@ -88,9 +92,6 @@ export const DropFile = () => {
                 >
                     <NeuMorphLogo />
                     <div className={styles.drpFileText}>
-                        {/* <label htmlFor="fileElem">
-                            Drop your .shapr file here, or
-                        </label> */}
                         Drop your .shapr file here, or
                         <input
                             type="file"
