@@ -1,0 +1,16 @@
+.shdCont {
+    --shd-height: 19.625rem;
+    --shd-p: 1.75rem;
+    --shd-width: calc(min(32.5rem, 95%));
+    height: var(--shd-height);
+    width: var(--shd-width);
+    box-shadow: 0px 30px 60px var(--color-kashmir-blue20);
+    border-radius: var(--app-br);
+    padding: var(--shd-p);
+    transition: all 0.3s ease-out;
+}
+
+.shdContScreenOne:hover {
+    --shd-p: 1.25rem;
+    --app-new-mb: 2.104375rem;
+}

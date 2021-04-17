@@ -1,0 +1,8 @@
+.ldpg {
+    background-color: var(--color-white);
+    width: calc(min(100vw, var(--app-max-width)));
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
