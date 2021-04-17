@@ -8,6 +8,8 @@ interface UploadFileDef {
 }
 
 export const UploadFile = (props: UploadFileDef) => {
+    const [progress, setProgress] = React.useState(0);
+
     return (
         <ConvertTemplate
             fileName={props.fileName || "tolumide_drone.shapr"}
@@ -16,6 +18,7 @@ export const UploadFile = (props: UploadFileDef) => {
                     <ProgressStatus
                         successText="Upload successful"
                         progressText="Uploading..."
+                        progressPercentage={progress}
                     />
                 </div>
             }
