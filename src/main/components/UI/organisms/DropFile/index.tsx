@@ -90,7 +90,7 @@ export const DropFile = (props: DropFileProps) => {
                     onDragExit={handleDragEnd}
                     ref={formElem}
                 >
-                    <NeumorphLogo />
+                    <NeumorphLogo removeMargin={true} />
                     <div className={styles.drpFileText}>
                         Drop your .shapr file here, or
                         <input

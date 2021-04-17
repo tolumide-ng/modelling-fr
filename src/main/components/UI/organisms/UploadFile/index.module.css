@@ -1,0 +1,17 @@
+.upf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.upfLogo {
+    margin-bottom: 4.3125rem;
+}
+
+.upfStatus {
+    display: flex;
+    width: 100%;
+}

@@ -9,12 +9,12 @@ interface displayCompsDef {
 }
 
 export const HomePage = () => {
-    const [current, setCurrent] = React.useState(1);
+    const [current, setCurrent] = React.useState(2);
     const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
 
     const displayComps: displayCompsDef = {
         1: () => <DropFile changeScreen={setCurrent} changeFile={setTheFile} />,
-        2: () => <UploadFile />,
+        2: () => <UploadFile fileName={theFile?.name ?? ""} />,
     };
 
     return (

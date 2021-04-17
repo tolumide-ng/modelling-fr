@@ -4,6 +4,7 @@
     --app-br: 2rem;
     --app-default-color: #4fc2fe;
     --app-new-mb: 1.104375rem;
+    --app-input-height: 3.5rem;
 
     --color-white: #fff;
     --color-black: #000;
@@ -14,6 +15,7 @@
     --color-san-juan-40: #334e6c66;
     --color-malibu: #4fc2fe;
     --color-red-orange: #ff3939;
+    --color-polar: #f7fafd;
 }
 
 @media screen and (max-width: 1024px) {

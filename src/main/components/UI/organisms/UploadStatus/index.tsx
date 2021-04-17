@@ -4,7 +4,7 @@ import styles from "./index.module.css";
 export const UploadStatus = () => {
     const [uploadState, setUploadState] = React.useState(0);
     return (
-        <section>
+        <section className={styles.ups}>
             {uploadState < 100 ? (
                 <div className="">
                     <p>Uploading...</p>
