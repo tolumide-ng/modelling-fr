@@ -12,7 +12,7 @@ interface displayCompsDef {
 }
 
 export const HomePage = () => {
-    const [current, setCurrent] = React.useState(4);
+    const [current, setCurrent] = React.useState(3);
     const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
     const [fileName, setFileName] = React.useState<undefined | string>(
         undefined
@@ -39,7 +39,11 @@ export const HomePage = () => {
         },
         3: () => {
             return {
-                component: <SelectConversion />,
+                component: (
+                    <SelectConversion
+                        fileName={fileName ?? theFile?.name ?? ""}
+                    />
+                ),
                 description: "Step 3: Select conversion target",
             };
         },
