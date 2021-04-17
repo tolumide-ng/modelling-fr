@@ -12,8 +12,11 @@ interface displayCompsDef {
 }
 
 export const HomePage = () => {
-    const [current, setCurrent] = React.useState(4);
+    const [current, setCurrent] = React.useState(1);
     const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
+    const [fileName, setFileName] = React.useState<undefined | string>(
+        undefined
+    );
 
     const displayComps: displayCompsDef = {
         1: () => {
@@ -48,7 +51,9 @@ export const HomePage = () => {
         },
         5: () => {
             return {
-                component: <DownloadFile />,
+                component: (
+                    <DownloadFile fileName={fileName ?? theFile?.name ?? ""} />
+                ),
                 description: "Step 5: Download File",
             };
         },

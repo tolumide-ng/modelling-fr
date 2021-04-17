@@ -7,16 +7,18 @@ interface DownloadFileDef {
     fileName: string;
 }
 
-export const DownloadFile = () => {
+export const DownloadFile = (props: DownloadFileDef) => {
+    const handleFileDownLoad = () => {};
     return (
         <ConvertTemplate
-            fileName=""
+            fileName={props.fileName}
             childComp={
                 <div className={styles.dwld}>
                     <Button
                         buttonClass={styles.dwldButton}
                         buttonText="Download"
                         buttonType="button"
+                        handleClick={handleFileDownLoad}
                     />
                 </div>
             }
