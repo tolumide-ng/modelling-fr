@@ -1,9 +1,8 @@
 .drpFile {
-    --drp-br: 0.5rem;
     height: 100%;
     width: 100%;
     border: 2px dashed var(--color-geyser);
-    border-radius: var(--drp-br);
+    border-radius: var(--app-br-mid);
     transition: all 0.3s ease-out;
 }
 

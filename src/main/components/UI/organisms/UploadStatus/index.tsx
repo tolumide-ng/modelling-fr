@@ -6,10 +6,10 @@ export const UploadStatus = () => {
     return (
         <section className={styles.ups}>
             {uploadState < 100 ? (
-                <div className="">
-                    <p>Uploading...</p>
+                <div className={styles.upsUploading}>
+                    <p className={styles.upsLoading}>Uploading...</p>
 
-                    <div className=""></div>
+                    <div className={styles.upsStatus}></div>
                 </div>
             ) : (
                 <div className=""></div>

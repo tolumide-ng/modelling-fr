@@ -2,4 +2,32 @@
     height: var(--app-input-height);
     background-color: var(--color-polar);
     width: 100%;
+    border-radius: var(--app-br-mid);
+    padding: 0 0.5rem;
+}
+
+.upsLoading {
+    padding-left: 0.125rem;
+    font-size: 0.75rem;
+    font-family: wSansMedium;
+    line-height: 1.5rem;
+    letter-spacing: 0.003em;
+    color: var(--color-san-juan);
+    font-weight: 600;
+}
+
+.upsUploading {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.upsStatus {
+    background-color: var(--color-azure-radiance);
+    height: 0.125rem;
+    /* width: 0.5%; */
+    width: 100%;
+    margin-bottom: 0.75rem;
+    opacity: 0.68;
 }

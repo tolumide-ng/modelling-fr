@@ -5,6 +5,7 @@
     --app-default-color: #4fc2fe;
     --app-new-mb: 1.104375rem;
     --app-input-height: 3.5rem;
+    --app-br-mid: 0.5rem;
 
     --color-white: #fff;
     --color-black: #000;
@@ -16,6 +17,7 @@
     --color-malibu: #4fc2fe;
     --color-red-orange: #ff3939;
     --color-polar: #f7fafd;
+    --color-azure-radiance: #00a7ff;
 }
 
 @media screen and (max-width: 1024px) {
