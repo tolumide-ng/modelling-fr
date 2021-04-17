@@ -8,7 +8,7 @@ interface UploadStatusDef {
 export const UploadStatus = (props: UploadStatusDef) => {
     const [uploadState, setUploadState] = React.useState(100);
     return (
-        <section
+        <div
             className={
                 uploadState >= 100
                     ? `${styles.ups} ${styles.upsSuccess}`
@@ -24,6 +24,6 @@ export const UploadStatus = (props: UploadStatusDef) => {
             ) : (
                 <div className={styles.upsSuccessText}>{props.successText}</div>
             )}
-        </section>
+        </div>
     );
 };

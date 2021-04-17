@@ -1,0 +1,51 @@
+.selectCv {
+    --selectCv-button-w: calc(min(9.25rem, 31.8965517241%));
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: wSansSemiBold;
+}
+
+.selectCvTitle {
+    margin-bottom: 1.3125rem;
+    color: var(--color-san-juan);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    text-align: center;
+    letter-spacing: 0.003em;
+}
+
+.selectCvAllButtons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.selectCvButton {
+    height: var(--app-input-height);
+    width: var(--selectCv-button-w);
+    border: 2px solid var(--color-geyser);
+    border-radius: var(--app-br-mid);
+    background-color: transparent;
+    color: var(--color-san-juan);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.003em;
+    cursor: pointer;
+    outline: none;
+}
+
+.selectCvButton:active {
+    background-color: var(--color-malibu);
+    outline: none;
+    border: none;
+    color: var(--color-white);
+}

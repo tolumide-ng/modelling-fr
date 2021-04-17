@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NeumorphLogo } from "../../molecules/NeumorphLogo";
+import { ConvertTemplate } from "../../template/ConvertTemplate";
 import { UploadStatus } from "../UploadStatus";
 import styles from "./index.module.css";
 
@@ -9,16 +9,13 @@ interface UploadFileDef {
 
 export const UploadFile = (props: UploadFileDef) => {
     return (
-        <article className={styles.upf}>
-            <div className={styles.upfLogo}>
-                <NeumorphLogo
-                    fileName={props.fileName || "tolumide_drone.shapr"}
-                />
-            </div>
-
-            <div className={styles.upfStatus}>
-                <UploadStatus successText="Upload successful" />
-            </div>
-        </article>
+        <ConvertTemplate
+            fileName={props.fileName || "tolumide_drone.shapr"}
+            childComp={
+                <div className={styles.upfStatus}>
+                    <UploadStatus successText="Upload successful" />
+                </div>
+            }
+        />
     );
 };
