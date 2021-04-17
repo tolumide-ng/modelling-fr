@@ -1,3 +1,4 @@
 .neu {
-    margin-bottom: 1.104375rem;
+    margin-bottom: var(--app-new-mb);
+    transition: all 0.3s ease-out;
 }

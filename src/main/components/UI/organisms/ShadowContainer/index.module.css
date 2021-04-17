@@ -7,4 +7,10 @@
     box-shadow: 0px 30px 60px var(--color-kashmir-blue20);
     border-radius: var(--app-br);
     padding: var(--shd-p);
+    transition: all 0.3s ease-out;
+}
+
+.shdCont:hover {
+    --shd-p: 1.25rem;
+    --app-new-mb: 2.104375rem;
 }

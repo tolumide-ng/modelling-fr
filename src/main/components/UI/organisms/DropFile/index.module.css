@@ -4,6 +4,7 @@
     width: 100%;
     border: 2px dashed var(--color-geyser);
     border-radius: var(--drp-br);
+    transition: all 0.3s ease-out;
 }
 
 .drpFileForm {
