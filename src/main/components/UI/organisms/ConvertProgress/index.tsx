@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ConvertTemplate } from "../../template/ConvertTemplate";
-import { UploadStatus } from "../UploadStatus";
+import { ProgressStatus } from "../ProgressStatus";
 import styles from "./index.module.css";
 
 export const ConvertProgress = () => {
@@ -9,7 +9,7 @@ export const ConvertProgress = () => {
             fileName=""
             childComp={
                 <div className={styles.cvtProgStatus}>
-                    <UploadStatus
+                    <ProgressStatus
                         successText="Successful"
                         progressText="Converting to STEP"
                     />

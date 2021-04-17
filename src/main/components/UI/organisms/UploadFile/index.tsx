@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ConvertTemplate } from "../../template/ConvertTemplate";
-import { UploadStatus } from "../UploadStatus";
+import { ProgressStatus } from "../ProgressStatus";
 import styles from "./index.module.css";
 
 interface UploadFileDef {
@@ -13,7 +13,7 @@ export const UploadFile = (props: UploadFileDef) => {
             fileName={props.fileName || "tolumide_drone.shapr"}
             childComp={
                 <div className={styles.upfStatus}>
-                    <UploadStatus
+                    <ProgressStatus
                         successText="Upload successful"
                         progressText="Uploading..."
                     />
