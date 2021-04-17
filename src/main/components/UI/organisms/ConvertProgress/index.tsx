@@ -9,7 +9,10 @@ export const ConvertProgress = () => {
         <ConvertTemplate
             fileName=""
             childComp={
-                <div className={styles.cvtProgStatus}>
+                <div
+                    className={styles.cvtProgStatus}
+                    aria-label="conversion progress"
+                >
                     <ProgressStatus
                         successText="Successful"
                         progressText="Converting to STEP"
