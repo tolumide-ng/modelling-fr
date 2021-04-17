@@ -1,4 +1,5 @@
 import * as React from "react";
+import { DropFile } from "../DropFile";
 import styles from "./index.module.css";
 
 interface ShadowContainerDef {
@@ -6,5 +7,9 @@ interface ShadowContainerDef {
 }
 
 export const ShadowContainer = (props: ShadowContainerDef) => {
-    return <article className={styles.shdCont}>{props.childContent}</article>;
+    return (
+        <article className={styles.shdCont}>
+            <DropFile />
+        </article>
+    );
 };

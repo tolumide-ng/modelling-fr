@@ -1,0 +1,44 @@
+.drpFile {
+    --drp-br: 0.5rem;
+    height: 100%;
+    width: 100%;
+    border: 2px dashed var(--color-geyser);
+    border-radius: var(--drp-br);
+}
+
+.drpFileForm {
+    height: 100%;
+    width: 100%;
+}
+
+.drpFileDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.drpFileText {
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    text-align: center;
+    color: var(--color-san-juan);
+    margin-bottom: 0.375rem;
+    letter-spacing: 0.003em;
+}
+
+.drpFileBrowse {
+    color: var(--color-malibu);
+}
+
+.drpComment {
+    color: var(--color-san-juan-40);
+    text-align: center;
+    letter-spacing: 0.003em;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1rem;
+}

@@ -1,12 +1,17 @@
 :root {
-    --app-default-color: #4fc2fe;
     --app-button-br: 5px;
-    --color-white: #fff;
     --app-max-width: 1500px;
+    --app-br: 2rem;
+    --app-default-color: #4fc2fe;
+
+    --color-white: #fff;
     --color-black: #000;
     --color-kashmir-blue20: #56759833;
     --color-mecury: #e5e5e5;
-    --app-br: 2rem;
+    --color-geyser: #d6dee7;
+    --color-san-juan: #334e6c;
+    --color-san-juan-40: #334e6c66;
+    --color-malibu: #4fc2fe;
 }
 
 @media screen and (max-width: 1024px) {
