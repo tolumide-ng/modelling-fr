@@ -1,3 +1,7 @@
+:root {
+    --progress: 0.5%;
+}
+
 .ups {
     height: var(--app-input-height);
     background-color: var(--color-polar);
@@ -27,7 +31,7 @@
     background-color: var(--color-azure-radiance);
     height: 0.125rem;
     /* width: 0.5%; */
-    width: 100%;
+    width: var(--progress);
     margin-bottom: 0.75rem;
     opacity: 0.68;
 }
