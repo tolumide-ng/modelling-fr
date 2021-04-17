@@ -21,7 +21,12 @@
     width: 100%;
 }
 
-.drpFileText {
+.drpFileInput {
+    display: none;
+}
+
+.drpFileText,
+.drpFileBrowse {
     font-weight: 600;
     font-size: 1.125rem;
     line-height: 1.5rem;
@@ -35,6 +40,8 @@
 .drpFileBrowse {
     color: var(--color-malibu);
     cursor: pointer;
+    border: none;
+    background-color: transparent;
 }
 
 .drpComment {
