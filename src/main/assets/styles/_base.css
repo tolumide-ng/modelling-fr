@@ -12,12 +12,6 @@ a {
     color: inherit;
 }
 
-@font-face {
-    font-family: wSansSemiBold;
-    src: url("../fonts/Work_Sans/WorkSans-SemiBold.ttf");
-}
-
-@font-face {
-    font-family: wSansMedium;
-    src: url("../fonts/Work_Sans/WorkSans-Medium.ttf");
+.dragOver {
+    background-color: var(--color-mecury);
 }

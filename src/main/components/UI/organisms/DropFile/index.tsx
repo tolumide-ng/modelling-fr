@@ -7,6 +7,7 @@ import styles from "./index.module.css";
 export const DropFile = () => {
     const fileElem = React.useRef<HTMLInputElement>(null);
     const fileSelect = React.useRef<HTMLButtonElement>(null);
+    const formElem = React.useRef<HTMLFormElement>(null);
 
     const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
     const [fileError, setFileError] = React.useState("");
@@ -33,9 +34,29 @@ export const DropFile = () => {
         }
     };
 
+    const handleDragOver = () => {
+        if (formElem.current) {
+            formElem.current.classList.add("dragOver");
+        }
+    };
+
+    const handleDragEnd = () => {
+        if (formElem.current) {
+            formElem.current.classList.remove("dragOver");
+        }
+    };
+
     return (
         <article className={styles.drpFile}>
-            <form encType="multipart/form-data" className={styles.drpFileForm}>
+            <form
+                encType="multipart/form-data"
+                className={styles.drpFileForm}
+                onDragOver={handleDragOver}
+                onDragEnter={handleDragOver}
+                onDragEnd={handleDragEnd}
+                onDragLeave={handleDragEnd}
+                ref={formElem}
+            >
                 <div className={styles.drpFileDiv}>
                     <NeuMorphLogo />
 
