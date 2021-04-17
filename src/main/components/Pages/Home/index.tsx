@@ -1,4 +1,6 @@
 import * as React from "react";
+import { ConvertProgress } from "../../UI/organisms/ConvertProgress";
+import { DownloadFile } from "../../UI/organisms/DownloadFile";
 import { DropFile } from "../../UI/organisms/DropFile";
 import { SelectConversion } from "../../UI/organisms/SelectConversion";
 import { ShadowContainer } from "../../UI/organisms/ShadowContainer";
@@ -10,13 +12,15 @@ interface displayCompsDef {
 }
 
 export const HomePage = () => {
-    const [current, setCurrent] = React.useState(3);
+    const [current, setCurrent] = React.useState(5);
     const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
 
     const displayComps: displayCompsDef = {
         1: () => <DropFile changeScreen={setCurrent} changeFile={setTheFile} />,
         2: () => <UploadFile fileName={theFile?.name ?? ""} />,
         3: () => <SelectConversion />,
+        4: () => <ConvertProgress />,
+        5: () => <DownloadFile />,
     };
 
     return (

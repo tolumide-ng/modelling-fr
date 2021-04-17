@@ -3,21 +3,16 @@ import { ConvertTemplate } from "../../template/ConvertTemplate";
 import { ProgressStatus } from "../ProgressStatus";
 import styles from "./index.module.css";
 
-interface UploadFileDef {
-    fileName: string;
-}
-
-export const UploadFile = (props: UploadFileDef) => {
-    const [progress, setProgress] = React.useState(0);
-
+export const ConvertProgress = () => {
+    const [progress, setProgress] = React.useState(40);
     return (
         <ConvertTemplate
-            fileName={props.fileName || "tolumide_drone.shapr"}
+            fileName=""
             childComp={
-                <div className={styles.upfStatus}>
+                <div className={styles.cvtProgStatus}>
                     <ProgressStatus
-                        successText="Upload successful"
-                        progressText="Uploading..."
+                        successText="Successful"
+                        progressText="Converting to STEP"
                         progressPercentage={progress}
                     />
                 </div>

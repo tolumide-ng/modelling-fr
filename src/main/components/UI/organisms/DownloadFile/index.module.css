@@ -1,0 +1,25 @@
+.dwld {
+    width: 100%;
+    font-family: wSansSemiBold;
+}
+
+.dwldButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: var(--app-input-height);
+    border: 2px solid var(--color-geyser);
+    border-radius: var(--app-br-mid);
+    background-color: transparent;
+    font-family: wSansSemiBold;
+    color: var(--color-san-juan);
+    cursor: pointer;
+    outline: none;
+}
+
+.dwldButton:active {
+    background-color: var(--color-malibu);
+    color: var(--color-white);
+    border: none;
+}
