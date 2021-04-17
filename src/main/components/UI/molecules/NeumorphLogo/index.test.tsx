@@ -1,25 +1,16 @@
 import "@testing-library/jest-dom";
 import * as React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { NeumorphLogo } from ".";
 
-test("handles clicks event", async () => {
-    const CURRENT = "click me";
-
-    const handleClick = jest.fn();
-
-    const { getByText } = render(
-        <Button
-            buttonText={CURRENT}
-            buttonClass=""
-            buttonType="button"
-            handleClick={handleClick}
-        />
+test("displays logo", async () => {
+    const { getByRole, getByAltText } = render(
+        <NeumorphLogo fileName="thFile.shapr" />
     );
 
-    const element = getByText(CURRENT);
+    const element = getByRole("generic", { name: /logo/i });
 
-    fireEvent.click(element);
+    const theImage = getByAltText("logo of the modelling application");
 
-    expect(handleClick).toHaveBeenCalled();
+    expect(element).toContainElement(theImage);
 });

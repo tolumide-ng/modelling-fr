@@ -24,3 +24,7 @@
     text-align: center;
     color: var(--color-san-juan);
 }
+
+.neuHide {
+    display: none;
+}
