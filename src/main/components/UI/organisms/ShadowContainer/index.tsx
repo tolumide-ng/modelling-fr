@@ -7,8 +7,15 @@ interface ShadowContainerDef {
 }
 
 export const ShadowContainer = (props: ShadowContainerDef) => {
+    const [stateNum, setStateNum] = React.useState(1);
     return (
-        <article className={styles.shdCont}>
+        <article
+            className={
+                stateNum === 1
+                    ? `${styles.shdContScreenOne} ${styles.shdCont}`
+                    : styles.shdCont
+            }
+        >
             <DropFile />
         </article>
     );

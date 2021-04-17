@@ -10,7 +10,7 @@
     transition: all 0.3s ease-out;
 }
 
-.shdCont:hover {
+.shdContScreenOne:hover {
     --shd-p: 1.25rem;
     --app-new-mb: 2.104375rem;
 }
