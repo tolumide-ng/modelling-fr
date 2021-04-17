@@ -41,6 +41,7 @@
     letter-spacing: 0.003em;
     cursor: pointer;
     outline: none;
+    font-family: wSansSemiBold;
 }
 
 .selectCvButton:active {
