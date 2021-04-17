@@ -8,6 +8,12 @@ export const DropFile = () => {
             <form encType="multipart/form-data" className={styles.drpFileForm}>
                 <div className={styles.drpFileDiv}>
                     <NeuMorphLogo />
+                    <input
+                        type="file"
+                        id="fileElem"
+                        multiple
+                        accept=".shapr"
+                    ></input>
 
                     <p className={styles.drpFileText}>
                         Drop your .shapr file here, or{" "}
