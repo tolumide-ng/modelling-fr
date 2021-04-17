@@ -17,7 +17,7 @@ export const UploadFile = (props: UploadFileDef) => {
             </div>
 
             <div className={styles.upfStatus}>
-                <UploadStatus />
+                <UploadStatus successText="Upload successful" />
             </div>
         </article>
     );

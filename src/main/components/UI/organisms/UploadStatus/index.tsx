@@ -1,10 +1,20 @@
 import * as React from "react";
 import styles from "./index.module.css";
 
-export const UploadStatus = () => {
-    const [uploadState, setUploadState] = React.useState(0);
+interface UploadStatusDef {
+    successText: string;
+}
+
+export const UploadStatus = (props: UploadStatusDef) => {
+    const [uploadState, setUploadState] = React.useState(100);
     return (
-        <section className={styles.ups}>
+        <section
+            className={
+                uploadState >= 100
+                    ? `${styles.ups} ${styles.upsSuccess}`
+                    : `${styles.ups} ${styles.upsRegular}`
+            }
+        >
             {uploadState < 100 ? (
                 <div className={styles.upsUploading}>
                     <p className={styles.upsLoading}>Uploading...</p>
@@ -12,7 +22,7 @@ export const UploadStatus = () => {
                     <div className={styles.upsStatus}></div>
                 </div>
             ) : (
-                <div className=""></div>
+                <div className={styles.upsSuccessText}>{props.successText}</div>
             )}
         </section>
     );

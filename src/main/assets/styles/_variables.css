@@ -18,6 +18,7 @@
     --color-red-orange: #ff3939;
     --color-polar: #f7fafd;
     --color-azure-radiance: #00a7ff;
+    --color-hint-green: #e1fde8;
 }
 
 @media screen and (max-width: 1024px) {
