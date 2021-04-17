@@ -8,6 +8,17 @@ interface ProgressStatusDef {
 }
 
 export const ProgressStatus = (props: ProgressStatusDef) => {
+    const progressRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        if (progressRef.current) {
+            progressRef.current.style.setProperty(
+                "--progress",
+                `${props.progressPercentage}%`
+            );
+        }
+    }, [props.progressPercentage]);
+
     return (
         <div
             className={
@@ -20,7 +31,7 @@ export const ProgressStatus = (props: ProgressStatusDef) => {
                 <div className={styles.upsUploading}>
                     <p className={styles.upsLoading}>{props.progressText}</p>
 
-                    <div className={styles.upsStatus}></div>
+                    <div className={styles.upsStatus} ref={progressRef}></div>
                 </div>
             ) : (
                 <div className={styles.upsSuccessText}>{props.successText}</div>

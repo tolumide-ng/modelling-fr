@@ -4,7 +4,7 @@ import { ProgressStatus } from "../ProgressStatus";
 import styles from "./index.module.css";
 
 export const ConvertProgress = () => {
-    const [progress, setProgress] = React.useState(90);
+    const [progress, setProgress] = React.useState(40);
     return (
         <ConvertTemplate
             fileName=""
