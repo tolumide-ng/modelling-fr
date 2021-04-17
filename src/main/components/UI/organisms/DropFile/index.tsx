@@ -108,7 +108,7 @@ export const DropFile = (props: DropFileProps) => {
                             ref={fileSelect}
                         />
                     </div>
-                    <p>
+                    <p className={styles.drpCommentP}>
                         <small className={styles.drpComment}>
                             Supports: .STEP, .STL and .IGES
                         </small>
