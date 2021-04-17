@@ -15,3 +15,8 @@ a {
 .dragOver {
     background-color: var(--color-mecury);
 }
+
+.appError {
+    font-size: 0.6rem;
+    color: var(--color-red-orange);
+}
