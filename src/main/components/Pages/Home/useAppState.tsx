@@ -47,8 +47,8 @@ export const useAppState = () => {
 
         const uploadConfig = {
             onUploadProgress: function (progressEvent: any) {
-                setAppState((appState) => ({
-                    ...appState,
+                setAppState((theAppState) => ({
+                    ...theAppState,
                     uploadProgress: Math.round(
                         (progressEvent.loaded * 100) / progressEvent.total
                     ),
@@ -66,17 +66,20 @@ export const useAppState = () => {
 
             const { fileName, fileId } = response?.data?.data;
 
-            setAppState((appState) => ({
-                ...appState,
+            setAppState((theAppState) => ({
+                ...theAppState,
                 fileName,
                 fileId,
             }));
 
-            setTimeout(() => {}, 2000);
+            // this is an intentional setTimeout to allow the user notice the file upload reached 100%
+            setTimeout(() => {
+                changeScreen();
+            }, 1000);
         } catch (error) {
             const theError = error.message;
-            setAppState((appState) => ({
-                ...appState,
+            setAppState((theAppState) => ({
+                ...theAppState,
                 fileUploadError: theError,
             }));
         }
