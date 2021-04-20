@@ -7,6 +7,7 @@ export interface ApplicationStateDef {
     uploadProgress: number;
     theFile: File | undefined;
     fileUploadError: string;
+    current: number;
 }
 
 interface Action {
@@ -21,10 +22,18 @@ export const useAppState = () => {
         fileId: undefined,
         theFile: undefined,
         fileUploadError: "",
+        current: 1,
     });
 
     const changeTheFile = (file: File) => {
         setAppState({ ...appState, theFile: file });
+    };
+
+    const changeScreen = () => {
+        setAppState((theAppState) => ({
+            ...theAppState,
+            current: theAppState.current + 1,
+        }));
     };
 
     const makeUploadFileRequest = async () => {
@@ -62,6 +71,8 @@ export const useAppState = () => {
                 fileName,
                 fileId,
             }));
+
+            setTimeout(() => {}, 2000);
         } catch (error) {
             const theError = error.message;
             setAppState((appState) => ({
@@ -76,5 +87,6 @@ export const useAppState = () => {
         setAppState,
         changeTheFile,
         makeUploadFileRequest,
+        changeScreen,
     };
 };

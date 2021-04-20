@@ -21,7 +21,6 @@ export interface ApplicationStateDef {
 }
 
 export const HomePage = () => {
-    const [current, setCurrent] = React.useState(1);
     const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
     const [fileName, setFileName] = React.useState<undefined | string>(
         undefined
@@ -30,24 +29,24 @@ export const HomePage = () => {
     const {
         appState,
         setAppState,
+        changeScreen,
         changeTheFile,
         makeUploadFileRequest,
     } = useAppState();
 
     React.useEffect(() => {
-        if (current === 2) {
+        if (appState.current === 2) {
             makeUploadFileRequest();
         }
-    }, [current]);
+    }, [appState.current]);
 
     const displayComps: DisplayCompsDef = {
         1: () => {
             return {
                 component: (
                     <DropFile
-                        changeScreen={setCurrent}
+                        changeScreen={changeScreen}
                         changeFile={changeTheFile}
-                        currentScreen={current}
                     />
                 ),
                 description:
@@ -95,12 +94,12 @@ export const HomePage = () => {
     return (
         <article
             className={styles.ldpg}
-            aria-valuetext={displayComps[current]().description}
-            aria-valuenow={current}
+            aria-valuetext={displayComps[appState.current]().description}
+            aria-valuenow={appState.current}
         >
             <ShadowContainer
-                childContent={displayComps[current]().component}
-                current={current}
+                childContent={displayComps[appState.current]().component}
+                current={appState.current}
             />
         </article>
     );
