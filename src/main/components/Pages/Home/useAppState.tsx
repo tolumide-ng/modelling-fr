@@ -36,12 +36,8 @@ export const useAppState = () => {
             formData.append("convertFile", appState.theFile);
         }
 
-        console.log("NOW WITHIN THE MAKE UPLOAD FILE REQUEST API");
-
         const uploadConfig = {
             onUploadProgress: function (progressEvent: any) {
-                console.log("RECEIVED SOMETHING>>>>>>>>>>>>>>", progressEvent);
-
                 progress = Math.round(
                     (progressEvent.loaded * 100) / progressEvent.total
                 );
@@ -54,18 +50,12 @@ export const useAppState = () => {
         };
 
         try {
-            console.log(
-                "BEFORE APPENDING THE RESPONSE FROM THE SERVER!!!!!!!!",
-                appState
-            );
             const response = await axiosCall({
                 path: "/upload",
                 method: "POST",
                 payload: formData,
                 onUploadProgress: uploadConfig.onUploadProgress,
             });
-
-            console.log("THE RESPONSE FROM THE SERVER IS >>>>>>>>>", response);
 
             const { fileName, fileId } = response?.data?.data;
 

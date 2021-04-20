@@ -40,10 +40,6 @@ export const HomePage = () => {
         }
     }, [current]);
 
-    React.useEffect(() => {
-        console.log("WHY WHAT DO YOU HAVE NOW", appState);
-    }, [appState.uploadProgress]);
-
     const displayComps: DisplayCompsDef = {
         1: () => {
             return {
