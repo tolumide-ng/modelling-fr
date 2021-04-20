@@ -5,8 +5,13 @@ import { SelectConversion, targetFormats } from ".";
 
 describe("Select Conversion Component", () => {
     test("Mounts select conversion component", async () => {
+        const mockFn = jest.fn();
+
         const { getByRole, getByText } = render(
-            <SelectConversion fileName="testing.shapr" />
+            <SelectConversion
+                fileName="testing.shapr"
+                handleTargetFormat={mockFn}
+            />
         );
 
         const element = getByRole("article");

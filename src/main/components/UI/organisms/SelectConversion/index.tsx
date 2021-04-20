@@ -2,11 +2,13 @@ import * as React from "react";
 import { Button } from "../../atoms/Button";
 import { ConvertTemplate } from "../../template/ConvertTemplate";
 import styles from "./index.module.css";
+import { targetTypesDef } from "../../../Pages/Home/useAppState";
 
-export const targetFormats = ["STEP", "STL", "IGES"];
+export const targetFormats: Array<targetTypesDef> = ["STEP", "STL", "IGES"];
 
 interface SelectConversionDef {
     fileName: string;
+    handleTargetFormat: (types: targetTypesDef) => Promise<void>;
 }
 
 export const SelectConversion = (props: SelectConversionDef) => {
@@ -23,6 +25,9 @@ export const SelectConversion = (props: SelectConversionDef) => {
                                 buttonText={button}
                                 buttonType="button"
                                 key={button}
+                                handleClick={() => {
+                                    props.handleTargetFormat(button);
+                                }}
                             />
                         ))}
                     </section>

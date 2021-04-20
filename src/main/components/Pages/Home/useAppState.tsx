@@ -8,12 +8,15 @@ export interface ApplicationStateDef {
     theFile: File | undefined;
     fileUploadError: string;
     current: number;
+    requestId: string | undefined;
 }
 
 interface Action {
     name: string;
     value: any;
 }
+
+export type targetTypesDef = "STEP" | "STL" | "IGES";
 
 export const useAppState = () => {
     const [appState, setAppState] = React.useState<ApplicationStateDef>({
@@ -23,6 +26,7 @@ export const useAppState = () => {
         theFile: undefined,
         fileUploadError: "",
         current: 1,
+        requestId: undefined,
     });
 
     const changeTheFile = (file: File) => {
@@ -85,11 +89,35 @@ export const useAppState = () => {
         }
     };
 
+    const handleTargetFormat = async (types: targetTypesDef) => {
+        try {
+            const response = await axiosCall({
+                path: "/convert",
+                method: "GET",
+                params: {
+                    target: types,
+                    id: appState.fileId,
+                },
+                payload: {},
+            });
+
+            changeScreen();
+
+            // this request must send back a requestId
+            // const { requestId } = response?.data?.data;
+
+            // setAppState((theAppState) => ({ ...theAppState, requestId }));
+        } catch (error) {}
+    };
+
+    // NEXT FUNCTION MAKES THE EVENT SOURCE REQUEST TO THE API FOR THE CONVERT PROGRESS
+
     return {
         appState,
         setAppState,
         changeTheFile,
         makeUploadFileRequest,
         changeScreen,
+        handleTargetFormat,
     };
 };

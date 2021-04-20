@@ -28,10 +28,10 @@ export const HomePage = () => {
 
     const {
         appState,
-        setAppState,
         changeScreen,
         changeTheFile,
         makeUploadFileRequest,
+        handleTargetFormat,
     } = useAppState();
 
     React.useEffect(() => {
@@ -70,6 +70,7 @@ export const HomePage = () => {
                 component: (
                     <SelectConversion
                         fileName={fileName ?? theFile?.name ?? ""}
+                        handleTargetFormat={handleTargetFormat}
                     />
                 ),
                 description: "Step 3: Select conversion target",
