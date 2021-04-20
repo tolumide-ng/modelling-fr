@@ -38,14 +38,12 @@ export const useAppState = () => {
 
         const uploadConfig = {
             onUploadProgress: function (progressEvent: any) {
-                progress = Math.round(
-                    (progressEvent.loaded * 100) / progressEvent.total
-                );
-
-                setAppState({
+                setAppState((appState) => ({
                     ...appState,
-                    uploadProgress: progress,
-                });
+                    uploadProgress: Math.round(
+                        (progressEvent.loaded * 100) / progressEvent.total
+                    ),
+                }));
             },
         };
 
@@ -59,19 +57,17 @@ export const useAppState = () => {
 
             const { fileName, fileId } = response?.data?.data;
 
-            setAppState({
+            setAppState((appState) => ({
                 ...appState,
-                uploadProgress: progress,
                 fileName,
                 fileId,
-            });
+            }));
         } catch (error) {
             const theError = error.message;
             setAppState((appState) => ({
                 ...appState,
                 fileUploadError: theError,
             }));
-            console.log("THE ERROR MESSAGE", theError);
         }
     };
 

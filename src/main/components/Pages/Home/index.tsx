@@ -40,10 +40,6 @@ export const HomePage = () => {
         }
     }, [current]);
 
-    React.useEffect(() => {
-        console.log("THER WAS AN APPLICATION ERROR", appState.fileUploadError);
-    }, [appState.fileUploadError]);
-
     const displayComps: DisplayCompsDef = {
         1: () => {
             return {
