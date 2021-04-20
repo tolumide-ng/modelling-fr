@@ -9,6 +9,8 @@ export interface ApplicationStateDef {
     fileUploadError: string;
     current: number;
     requestId: string | undefined;
+    convertProgress: number;
+    fileConvertError: string;
 }
 
 interface Action {
@@ -27,6 +29,8 @@ export const useAppState = () => {
         fileUploadError: "",
         current: 1,
         requestId: undefined,
+        convertProgress: 0,
+        fileConvertError: "",
     });
 
     const changeTheFile = (file: File) => {
@@ -39,6 +43,20 @@ export const useAppState = () => {
             current: theAppState.current + 1,
         }));
     };
+
+    let ssEvent: EventSource | undefined = undefined;
+
+    React.useEffect(() => {
+        return () => {
+            if (
+                appState.convertProgress > 0 &&
+                appState.convertProgress < 100 &&
+                ssEvent
+            ) {
+                ssEvent.close();
+            }
+        };
+    });
 
     const makeUploadFileRequest = async () => {
         const formData = new FormData();
@@ -89,28 +107,75 @@ export const useAppState = () => {
         }
     };
 
-    const handleTargetFormat = async (types: targetTypesDef) => {
+    const handleTargetFormat = async (type: targetTypesDef) => {
         try {
-            const response = await axiosCall({
-                path: "/convert",
-                method: "GET",
-                params: {
-                    target: types,
-                    id: appState.fileId,
-                },
+            await axiosCall({
+                path: `/convert/${type}/${appState.fileId}`,
+                method: "PATCH",
                 payload: {},
             });
 
             changeScreen();
-
-            // this request must send back a requestId
-            // const { requestId } = response?.data?.data;
-
-            // setAppState((theAppState) => ({ ...theAppState, requestId }));
         } catch (error) {}
     };
 
     // NEXT FUNCTION MAKES THE EVENT SOURCE REQUEST TO THE API FOR THE CONVERT PROGRESS
+
+    const streamConversion = async () => {
+        try {
+            ssEvent = new EventSource(
+                `${process.env.BASE_URL}/stream/${appState.fileId}`
+            );
+
+            ssEvent.addEventListener(
+                "message",
+                (event: any) => {
+                    let data = JSON.parse(event.data);
+
+                    if (data.status) {
+                        setAppState((theAppState) => ({
+                            ...theAppState,
+                            convertProgress: data.status,
+                        }));
+                    }
+
+                    if (appState.convertProgress >= 100) {
+                        if (ssEvent) {
+                            ssEvent.close();
+                        }
+                        changeScreen();
+                    }
+                },
+                false
+            );
+
+            ssEvent.addEventListener(
+                "error",
+                () => {
+                    if (ssEvent) {
+                        ssEvent.close();
+                    }
+
+                    setAppState((theAppState) => ({
+                        ...theAppState,
+                        fileConvertError:
+                            "There was a problem, converting your file, Try later",
+                    }));
+                },
+                false
+            );
+
+            ssEvent.addEventListener(
+                "close",
+                () => {
+                    if (ssEvent) {
+                        ssEvent.close();
+                    }
+                },
+                false
+            );
+        } catch (error) {}
+    };
 
     return {
         appState,
@@ -119,5 +184,6 @@ export const useAppState = () => {
         makeUploadFileRequest,
         changeScreen,
         handleTargetFormat,
+        streamConversion,
     };
 };

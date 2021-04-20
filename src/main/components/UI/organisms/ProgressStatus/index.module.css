@@ -41,6 +41,7 @@
     width: var(--progress);
     margin-bottom: 0.75rem;
     opacity: 0.68;
+    transition: all 0.3s ease-out;
 }
 
 .upsSuccessText {

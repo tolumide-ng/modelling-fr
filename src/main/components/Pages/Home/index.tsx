@@ -32,11 +32,15 @@ export const HomePage = () => {
         changeTheFile,
         makeUploadFileRequest,
         handleTargetFormat,
+        streamConversion,
     } = useAppState();
 
     React.useEffect(() => {
         if (appState.current === 2) {
             makeUploadFileRequest();
+        }
+        if (appState.current === 4) {
+            streamConversion();
         }
     }, [appState.current]);
 
@@ -78,7 +82,11 @@ export const HomePage = () => {
         },
         4: () => {
             return {
-                component: <ConvertProgress />,
+                component: (
+                    <ConvertProgress
+                        convertProgress={appState.convertProgress}
+                    />
+                ),
                 description: "Step 4: Converting file...",
             };
         },

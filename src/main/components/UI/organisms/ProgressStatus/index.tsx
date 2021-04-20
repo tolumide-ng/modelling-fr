@@ -30,10 +30,9 @@ export const ProgressStatus = (props: ProgressStatusDef) => {
                     : `${styles.ups} ${styles.upsRegular}`
             }
         >
-            {props.progressPercentage < 100 ? (
+            {props.progressPercentage < 100 && !props.displayError ? (
                 <div className={styles.upsUploading}>
                     <p className={styles.upsLoading}>{props.progressText}</p>
-
                     <div
                         className={styles.upsStatus}
                         ref={progressRef}

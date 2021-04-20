@@ -6,7 +6,7 @@ import { ConvertProgress } from ".";
 describe("ConvertProgress Component", () => {
     test("Mounts Component and its child components", async () => {
         const { getByRole, getByAltText, getByText } = render(
-            <ConvertProgress />
+            <ConvertProgress convertProgress={10} />
         );
 
         const element = getByRole("article");
