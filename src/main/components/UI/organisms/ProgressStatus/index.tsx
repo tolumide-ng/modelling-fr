@@ -5,6 +5,7 @@ interface ProgressStatusDef {
     successText: string;
     progressText: string;
     progressPercentage: number;
+    displayError?: string;
 }
 
 export const ProgressStatus = (props: ProgressStatusDef) => {
@@ -24,7 +25,7 @@ export const ProgressStatus = (props: ProgressStatusDef) => {
             aria-label="progress status"
             role="progress status"
             className={
-                props.progressPercentage >= 100
+                props.progressPercentage >= 100 && !props.displayError
                     ? `${styles.ups} ${styles.upsSuccess}`
                     : `${styles.ups} ${styles.upsRegular}`
             }
@@ -43,7 +44,19 @@ export const ProgressStatus = (props: ProgressStatusDef) => {
                     ></div>
                 </div>
             ) : (
+                <></>
+            )}
+
+            {props.progressPercentage >= 100 && !props.displayError ? (
                 <div className={styles.upsSuccessText}>{props.successText}</div>
+            ) : (
+                <></>
+            )}
+
+            {props.displayError ? (
+                <div className={styles.upsErrorText}>{props.displayError}</div>
+            ) : (
+                <></>
             )}
         </div>
     );

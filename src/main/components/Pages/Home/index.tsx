@@ -5,26 +5,48 @@ import { DropFile } from "../../UI/organisms/DropFile";
 import { SelectConversion } from "../../UI/organisms/SelectConversion";
 import { ShadowContainer } from "../../UI/organisms/ShadowContainer";
 import { UploadFile } from "../../UI/organisms/UploadFile";
+import { useAppState } from "./useAppState";
 import styles from "./index.module.css";
 
-interface displayCompsDef {
+interface DisplayCompsDef {
     [key: number]: () => { component: JSX.Element; description: string };
 }
 
+export interface ApplicationStateDef {
+    fileName: undefined | string;
+    fileId: undefined | number;
+    uploadProgress: number;
+    theFile: File | undefined;
+    fileUploadError: string;
+}
+
 export const HomePage = () => {
-    const [current, setCurrent] = React.useState(3);
     const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
     const [fileName, setFileName] = React.useState<undefined | string>(
         undefined
     );
 
-    const displayComps: displayCompsDef = {
+    const {
+        appState,
+        changeScreen,
+        changeTheFile,
+        makeUploadFileRequest,
+        handleTargetFormat,
+    } = useAppState();
+
+    React.useEffect(() => {
+        if (appState.current === 2) {
+            makeUploadFileRequest();
+        }
+    }, [appState.current]);
+
+    const displayComps: DisplayCompsDef = {
         1: () => {
             return {
                 component: (
                     <DropFile
-                        changeScreen={setCurrent}
-                        changeFile={setTheFile}
+                        changeScreen={changeScreen}
+                        changeFile={changeTheFile}
                     />
                 ),
                 description:
@@ -33,7 +55,13 @@ export const HomePage = () => {
         },
         2: () => {
             return {
-                component: <UploadFile fileName={theFile?.name ?? ""} />,
+                component: (
+                    <UploadFile
+                        fileName={theFile?.name ?? ""}
+                        uploadProgress={appState.uploadProgress}
+                        fileUploadError={appState.fileUploadError}
+                    />
+                ),
                 description: "Step 2: Upload File",
             };
         },
@@ -42,6 +70,7 @@ export const HomePage = () => {
                 component: (
                     <SelectConversion
                         fileName={fileName ?? theFile?.name ?? ""}
+                        handleTargetFormat={handleTargetFormat}
                     />
                 ),
                 description: "Step 3: Select conversion target",
@@ -66,12 +95,12 @@ export const HomePage = () => {
     return (
         <article
             className={styles.ldpg}
-            aria-valuetext={displayComps[current]().description}
-            aria-valuenow={current}
+            aria-valuetext={displayComps[appState.current]().description}
+            aria-valuenow={appState.current}
         >
             <ShadowContainer
-                childContent={displayComps[current]().component}
-                current={current}
+                childContent={displayComps[appState.current]().component}
+                current={appState.current}
             />
         </article>
     );

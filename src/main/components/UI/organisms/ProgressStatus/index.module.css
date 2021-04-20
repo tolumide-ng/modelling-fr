@@ -55,3 +55,16 @@
     width: 100%;
     align-items: center;
 }
+
+.upsErrorText {
+    font-family: wSansSemiBold;
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.003em;
+    color: var(--color-red-orange);
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}

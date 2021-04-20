@@ -7,6 +7,7 @@ interface AxiosProps {
     contentType?: string;
     params?: {};
     method: ForAxiosDefs;
+    onUploadProgress?: (progressEvent: any) => void;
 }
 
 interface Config extends AxiosRequestConfig {
@@ -43,6 +44,10 @@ export const axiosCall = async (props: AxiosProps) => {
         url,
         headers,
     };
+
+    if (props.onUploadProgress) {
+        axiosData.onUploadProgress = props.onUploadProgress;
+    }
 
     try {
         const response = await axios(axiosData);

@@ -1,12 +1,13 @@
 import * as React from "react";
 import { confirmSize } from "../../../../utilities/helpers/files";
+import { ApplicationStateDef } from "../../../Pages/Home/useAppState";
 import { Button } from "../../atoms/Button";
 import { NeumorphLogo } from "../../molecules/NeumorphLogo";
 import styles from "./index.module.css";
 
 interface DropFileProps {
-    changeScreen: React.Dispatch<React.SetStateAction<number>>;
-    changeFile: React.Dispatch<React.SetStateAction<File | undefined>>;
+    changeScreen: () => void;
+    changeFile: (file: File) => void;
 }
 
 export const DropFile = (props: DropFileProps) => {
@@ -26,6 +27,7 @@ export const DropFile = (props: DropFileProps) => {
             try {
                 if (confirmSize(file.size)) {
                     props.changeFile(file);
+                    props.changeScreen();
                 }
             } catch (error) {
                 setFileError(error);
@@ -66,6 +68,7 @@ export const DropFile = (props: DropFileProps) => {
                     reader.readAsDataURL(uploadedFile);
 
                     props.changeFile(uploadedFile);
+                    props.changeScreen();
                 }
             } catch (error) {
                 setFileError(error);
