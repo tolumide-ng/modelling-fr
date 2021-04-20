@@ -7,6 +7,7 @@ import styles from "./index.module.css";
 interface DropFileProps {
     changeScreen: React.Dispatch<React.SetStateAction<number>>;
     changeFile: React.Dispatch<React.SetStateAction<File | undefined>>;
+    currentScreen: number;
 }
 
 export const DropFile = (props: DropFileProps) => {
@@ -26,6 +27,7 @@ export const DropFile = (props: DropFileProps) => {
             try {
                 if (confirmSize(file.size)) {
                     props.changeFile(file);
+                    props.changeScreen(props.currentScreen + 1);
                 }
             } catch (error) {
                 setFileError(error);
@@ -66,6 +68,7 @@ export const DropFile = (props: DropFileProps) => {
                     reader.readAsDataURL(uploadedFile);
 
                     props.changeFile(uploadedFile);
+                    props.changeScreen(props.currentScreen + 1);
                 }
             } catch (error) {
                 setFileError(error);

@@ -10,7 +10,11 @@ describe("Drop File Component", () => {
         // Big Thanks to: https://github.com/testing-library/react-testing-library/issues/339#issuecomment-526310225
 
         const { getByText } = render(
-            <DropFile changeFile={changeFile} changeScreen={() => {}} />
+            <DropFile
+                changeFile={changeFile}
+                changeScreen={() => {}}
+                currentScreen={1}
+            />
         );
 
         const element = getByText("browse");

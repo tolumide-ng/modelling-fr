@@ -12,7 +12,7 @@ interface displayCompsDef {
 }
 
 export const HomePage = () => {
-    const [current, setCurrent] = React.useState(3);
+    const [current, setCurrent] = React.useState(1);
     const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
     const [fileName, setFileName] = React.useState<undefined | string>(
         undefined
@@ -25,6 +25,7 @@ export const HomePage = () => {
                     <DropFile
                         changeScreen={setCurrent}
                         changeFile={setTheFile}
+                        currentScreen={current}
                     />
                 ),
                 description:
