@@ -6,7 +6,7 @@ import styles from "./index.module.css";
 
 interface DropFileProps {
     changeScreen: React.Dispatch<React.SetStateAction<number>>;
-    changeFile: React.Dispatch<React.SetStateAction<File | undefined>>;
+    changeFile: (file: File) => void;
     currentScreen: number;
 }
 

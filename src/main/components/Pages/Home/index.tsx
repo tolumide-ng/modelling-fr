@@ -5,10 +5,19 @@ import { DropFile } from "../../UI/organisms/DropFile";
 import { SelectConversion } from "../../UI/organisms/SelectConversion";
 import { ShadowContainer } from "../../UI/organisms/ShadowContainer";
 import { UploadFile } from "../../UI/organisms/UploadFile";
+import { useAppState } from "./useAppState";
 import styles from "./index.module.css";
 
-interface displayCompsDef {
+interface DisplayCompsDef {
     [key: number]: () => { component: JSX.Element; description: string };
+}
+
+export interface ApplicationStateDef {
+    fileName: undefined | string;
+    fileId: undefined | number;
+    uploadProgress: number;
+    theFile: File | undefined;
+    fileUploadError: string;
 }
 
 export const HomePage = () => {
@@ -18,13 +27,30 @@ export const HomePage = () => {
         undefined
     );
 
-    const displayComps: displayCompsDef = {
+    const {
+        appState,
+        setAppState,
+        changeTheFile,
+        makeUploadFileRequest,
+    } = useAppState();
+
+    React.useEffect(() => {
+        if (current === 2) {
+            makeUploadFileRequest();
+        }
+    }, [current]);
+
+    React.useEffect(() => {
+        console.log("WHY WHAT DO YOU HAVE NOW", appState);
+    }, [appState.uploadProgress]);
+
+    const displayComps: DisplayCompsDef = {
         1: () => {
             return {
                 component: (
                     <DropFile
                         changeScreen={setCurrent}
-                        changeFile={setTheFile}
+                        changeFile={changeTheFile}
                         currentScreen={current}
                     />
                 ),
@@ -34,7 +60,12 @@ export const HomePage = () => {
         },
         2: () => {
             return {
-                component: <UploadFile fileName={theFile?.name ?? ""} />,
+                component: (
+                    <UploadFile
+                        fileName={theFile?.name ?? ""}
+                        uploadProgress={appState.uploadProgress}
+                    />
+                ),
                 description: "Step 2: Upload File",
             };
         },
