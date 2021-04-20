@@ -66,7 +66,12 @@ export const useAppState = () => {
                 fileId,
             });
         } catch (error) {
-            setAppState({ ...appState, fileUploadError: error.messsage });
+            const theError = error.message;
+            setAppState((appState) => ({
+                ...appState,
+                fileUploadError: theError,
+            }));
+            console.log("THE ERROR MESSAGE", theError);
         }
     };
 

@@ -6,6 +6,7 @@ import styles from "./index.module.css";
 interface UploadFileDef {
     fileName: string;
     uploadProgress: number;
+    fileUploadError: string;
 }
 
 export const UploadFile = (props: UploadFileDef) => {
@@ -18,6 +19,7 @@ export const UploadFile = (props: UploadFileDef) => {
                         successText="Upload successful"
                         progressText="Uploading..."
                         progressPercentage={props.uploadProgress}
+                        displayError={props.fileUploadError}
                     />
                 </div>
             }

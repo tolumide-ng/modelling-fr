@@ -40,6 +40,10 @@ export const HomePage = () => {
         }
     }, [current]);
 
+    React.useEffect(() => {
+        console.log("THER WAS AN APPLICATION ERROR", appState.fileUploadError);
+    }, [appState.fileUploadError]);
+
     const displayComps: DisplayCompsDef = {
         1: () => {
             return {
@@ -60,6 +64,7 @@ export const HomePage = () => {
                     <UploadFile
                         fileName={theFile?.name ?? ""}
                         uploadProgress={appState.uploadProgress}
+                        fileUploadError={appState.fileUploadError}
                     />
                 ),
                 description: "Step 2: Upload File",

@@ -1,4 +1,15 @@
 .upfStatus {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.upfStatusError {
+    margin-bottom: 0.3rem;
+    margin-left: 0.5rem;
+}
+
+.upfStatusCont {
+    display: flex;
     width: 100%;
 }
