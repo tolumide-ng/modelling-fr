@@ -12,31 +12,22 @@ interface DisplayCompsDef {
     [key: number]: () => { component: JSX.Element; description: string };
 }
 
-export interface ApplicationStateDef {
-    fileName: undefined | string;
-    fileId: undefined | number;
-    uploadProgress: number;
-    theFile: File | undefined;
-    fileUploadError: string;
-}
-
 export const HomePage = () => {
-    const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
-    const [fileName, setFileName] = React.useState<undefined | string>(
-        undefined
-    );
-
     const {
         appState,
         changeScreen,
         changeTheFile,
         makeUploadFileRequest,
         handleTargetFormat,
+        streamConversion,
     } = useAppState();
 
     React.useEffect(() => {
         if (appState.current === 2) {
             makeUploadFileRequest();
+        }
+        if (appState.current === 4) {
+            streamConversion();
         }
     }, [appState.current]);
 
@@ -57,7 +48,7 @@ export const HomePage = () => {
             return {
                 component: (
                     <UploadFile
-                        fileName={theFile?.name ?? ""}
+                        fileName={appState.fileName}
                         uploadProgress={appState.uploadProgress}
                         fileUploadError={appState.fileUploadError}
                     />
@@ -69,7 +60,7 @@ export const HomePage = () => {
             return {
                 component: (
                     <SelectConversion
-                        fileName={fileName ?? theFile?.name ?? ""}
+                        fileName={appState.fileName}
                         handleTargetFormat={handleTargetFormat}
                     />
                 ),
@@ -78,15 +69,19 @@ export const HomePage = () => {
         },
         4: () => {
             return {
-                component: <ConvertProgress />,
+                component: (
+                    <ConvertProgress
+                        convertProgress={appState.convertProgress}
+                        fileName={appState.targetName}
+                        targetType={appState.targetType}
+                    />
+                ),
                 description: "Step 4: Converting file...",
             };
         },
         5: () => {
             return {
-                component: (
-                    <DownloadFile fileName={fileName ?? theFile?.name ?? ""} />
-                ),
+                component: <DownloadFile fileName={appState.targetName} />,
                 description: "Step 5: Download File",
             };
         },

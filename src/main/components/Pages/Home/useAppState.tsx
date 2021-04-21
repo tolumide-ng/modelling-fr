@@ -2,13 +2,17 @@ import * as React from "react";
 import { axiosCall } from "../../../utilities/helpers/axiosCall";
 
 export interface ApplicationStateDef {
-    fileName: undefined | string;
+    fileName: string;
     fileId: undefined | number;
     uploadProgress: number;
     theFile: File | undefined;
     fileUploadError: string;
     current: number;
     requestId: string | undefined;
+    convertProgress: number;
+    fileConvertError: string;
+    targetName: string;
+    targetType: string;
 }
 
 interface Action {
@@ -21,16 +25,20 @@ export type targetTypesDef = "STEP" | "STL" | "IGES";
 export const useAppState = () => {
     const [appState, setAppState] = React.useState<ApplicationStateDef>({
         uploadProgress: 0,
-        fileName: undefined,
+        fileName: "",
         fileId: undefined,
         theFile: undefined,
         fileUploadError: "",
         current: 1,
         requestId: undefined,
+        convertProgress: 0,
+        fileConvertError: "",
+        targetName: "",
+        targetType: "",
     });
 
     const changeTheFile = (file: File) => {
-        setAppState({ ...appState, theFile: file });
+        setAppState({ ...appState, theFile: file, fileName: file.name });
     };
 
     const changeScreen = () => {
@@ -39,6 +47,20 @@ export const useAppState = () => {
             current: theAppState.current + 1,
         }));
     };
+
+    let ssEvent: EventSource | undefined = undefined;
+
+    React.useEffect(() => {
+        return () => {
+            if (
+                appState.convertProgress > 0 &&
+                appState.convertProgress < 100 &&
+                ssEvent
+            ) {
+                ssEvent.close();
+            }
+        };
+    });
 
     const makeUploadFileRequest = async () => {
         const formData = new FormData();
@@ -81,7 +103,10 @@ export const useAppState = () => {
                 changeScreen();
             }, 1000);
         } catch (error) {
-            const theError = error.message;
+            let theError = error.message;
+            if (theError === "Cannot read property 'fileName' of undefined") {
+                theError = "Please try again later ☹️";
+            }
             setAppState((theAppState) => ({
                 ...theAppState,
                 fileUploadError: theError,
@@ -89,28 +114,86 @@ export const useAppState = () => {
         }
     };
 
-    const handleTargetFormat = async (types: targetTypesDef) => {
+    const handleTargetFormat = async (targetType: targetTypesDef) => {
         try {
             const response = await axiosCall({
-                path: "/convert",
-                method: "GET",
-                params: {
-                    target: types,
-                    id: appState.fileId,
-                },
+                path: `/convert/${targetType}/${appState.fileId}`,
+                method: "PATCH",
                 payload: {},
             });
 
+            const { targetName } = response?.data?.data;
+
+            setAppState((theAppState) => ({
+                ...theAppState,
+                targetName,
+                targetType,
+            }));
+
             changeScreen();
-
-            // this request must send back a requestId
-            // const { requestId } = response?.data?.data;
-
-            // setAppState((theAppState) => ({ ...theAppState, requestId }));
         } catch (error) {}
     };
 
     // NEXT FUNCTION MAKES THE EVENT SOURCE REQUEST TO THE API FOR THE CONVERT PROGRESS
+
+    const streamConversion = async () => {
+        try {
+            ssEvent = new EventSource(
+                `${process.env.BASE_URL}/stream/${appState.fileId}`
+            );
+
+            ssEvent.addEventListener(
+                "message",
+                (event: any) => {
+                    let data = JSON.parse(event.data);
+
+                    if (data.status) {
+                        setAppState((theAppState) => ({
+                            ...theAppState,
+                            convertProgress: data.status,
+                        }));
+
+                        if (data.status >= 100) {
+                            changeScreen();
+                        }
+                    }
+
+                    if (appState.convertProgress >= 100) {
+                        if (ssEvent) {
+                            ssEvent.close();
+                        }
+                    }
+                },
+                false
+            );
+
+            ssEvent.addEventListener(
+                "error",
+                () => {
+                    if (ssEvent) {
+                        ssEvent.close();
+                    }
+
+                    setAppState((theAppState) => ({
+                        ...theAppState,
+                        fileConvertError:
+                            "There was a problem, converting your file, Try later",
+                    }));
+                },
+                false
+            );
+
+            ssEvent.addEventListener(
+                "close",
+                () => {
+                    if (ssEvent) {
+                        ssEvent.close();
+                    }
+                },
+                false
+            );
+        } catch (error) {}
+    };
 
     return {
         appState,
@@ -119,5 +202,6 @@ export const useAppState = () => {
         makeUploadFileRequest,
         changeScreen,
         handleTargetFormat,
+        streamConversion,
     };
 };

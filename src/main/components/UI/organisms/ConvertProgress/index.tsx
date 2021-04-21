@@ -3,11 +3,16 @@ import { ConvertTemplate } from "../../template/ConvertTemplate";
 import { ProgressStatus } from "../ProgressStatus";
 import styles from "./index.module.css";
 
-export const ConvertProgress = () => {
-    const [progress, setProgress] = React.useState(40);
+interface ConvertProgressDef {
+    convertProgress: number;
+    fileName: string;
+    targetType: string;
+}
+
+export const ConvertProgress = (props: ConvertProgressDef) => {
     return (
         <ConvertTemplate
-            fileName=""
+            fileName={props.fileName}
             childComp={
                 <div
                     className={styles.cvtProgStatus}
@@ -15,8 +20,8 @@ export const ConvertProgress = () => {
                 >
                     <ProgressStatus
                         successText="Successful"
-                        progressText="Converting to STEP"
-                        progressPercentage={progress}
+                        progressText={`Converting to ${props.targetType}`}
+                        progressPercentage={props.convertProgress}
                     />
                 </div>
             }
