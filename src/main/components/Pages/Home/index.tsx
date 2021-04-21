@@ -12,20 +12,7 @@ interface DisplayCompsDef {
     [key: number]: () => { component: JSX.Element; description: string };
 }
 
-export interface ApplicationStateDef {
-    fileName: undefined | string;
-    fileId: undefined | number;
-    uploadProgress: number;
-    theFile: File | undefined;
-    fileUploadError: string;
-}
-
 export const HomePage = () => {
-    const [theFile, setTheFile] = React.useState<File | undefined>(undefined);
-    const [fileName, setFileName] = React.useState<undefined | string>(
-        undefined
-    );
-
     const {
         appState,
         changeScreen,
@@ -61,7 +48,7 @@ export const HomePage = () => {
             return {
                 component: (
                     <UploadFile
-                        fileName={theFile?.name ?? ""}
+                        fileName={appState.fileName}
                         uploadProgress={appState.uploadProgress}
                         fileUploadError={appState.fileUploadError}
                     />
@@ -73,7 +60,7 @@ export const HomePage = () => {
             return {
                 component: (
                     <SelectConversion
-                        fileName={fileName ?? theFile?.name ?? ""}
+                        fileName={appState.fileName}
                         handleTargetFormat={handleTargetFormat}
                     />
                 ),
@@ -85,6 +72,8 @@ export const HomePage = () => {
                 component: (
                     <ConvertProgress
                         convertProgress={appState.convertProgress}
+                        fileName={appState.targetName}
+                        targetType={appState.targetType}
                     />
                 ),
                 description: "Step 4: Converting file...",
@@ -92,9 +81,7 @@ export const HomePage = () => {
         },
         5: () => {
             return {
-                component: (
-                    <DownloadFile fileName={fileName ?? theFile?.name ?? ""} />
-                ),
+                component: <DownloadFile fileName={appState.targetName} />,
                 description: "Step 5: Download File",
             };
         },

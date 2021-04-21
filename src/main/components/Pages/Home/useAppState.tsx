@@ -2,7 +2,7 @@ import * as React from "react";
 import { axiosCall } from "../../../utilities/helpers/axiosCall";
 
 export interface ApplicationStateDef {
-    fileName: undefined | string;
+    fileName: string;
     fileId: undefined | number;
     uploadProgress: number;
     theFile: File | undefined;
@@ -11,6 +11,8 @@ export interface ApplicationStateDef {
     requestId: string | undefined;
     convertProgress: number;
     fileConvertError: string;
+    targetName: string;
+    targetType: string;
 }
 
 interface Action {
@@ -23,7 +25,7 @@ export type targetTypesDef = "STEP" | "STL" | "IGES";
 export const useAppState = () => {
     const [appState, setAppState] = React.useState<ApplicationStateDef>({
         uploadProgress: 0,
-        fileName: undefined,
+        fileName: "",
         fileId: undefined,
         theFile: undefined,
         fileUploadError: "",
@@ -31,10 +33,12 @@ export const useAppState = () => {
         requestId: undefined,
         convertProgress: 0,
         fileConvertError: "",
+        targetName: "",
+        targetType: "",
     });
 
     const changeTheFile = (file: File) => {
-        setAppState({ ...appState, theFile: file });
+        setAppState({ ...appState, theFile: file, fileName: file.name });
     };
 
     const changeScreen = () => {
@@ -99,7 +103,10 @@ export const useAppState = () => {
                 changeScreen();
             }, 1000);
         } catch (error) {
-            const theError = error.message;
+            let theError = error.message;
+            if (theError === "Cannot read property 'fileName' of undefined") {
+                theError = "Please try again later ☹️";
+            }
             setAppState((theAppState) => ({
                 ...theAppState,
                 fileUploadError: theError,
@@ -107,13 +114,21 @@ export const useAppState = () => {
         }
     };
 
-    const handleTargetFormat = async (type: targetTypesDef) => {
+    const handleTargetFormat = async (targetType: targetTypesDef) => {
         try {
-            await axiosCall({
-                path: `/convert/${type}/${appState.fileId}`,
+            const response = await axiosCall({
+                path: `/convert/${targetType}/${appState.fileId}`,
                 method: "PATCH",
                 payload: {},
             });
+
+            const { targetName } = response?.data?.data;
+
+            setAppState((theAppState) => ({
+                ...theAppState,
+                targetName,
+                targetType,
+            }));
 
             changeScreen();
         } catch (error) {}
@@ -137,13 +152,16 @@ export const useAppState = () => {
                             ...theAppState,
                             convertProgress: data.status,
                         }));
+
+                        if (data.status >= 100) {
+                            changeScreen();
+                        }
                     }
 
                     if (appState.convertProgress >= 100) {
                         if (ssEvent) {
                             ssEvent.close();
                         }
-                        changeScreen();
                     }
                 },
                 false
