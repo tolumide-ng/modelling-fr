@@ -33,7 +33,7 @@ jobs:
     name: Deploy the application
     runs-on: ubuntu-latest
     needs: test
-    if: github.event_name == "push" && (github.ref == "refs/heads/develop")
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/develop')
     env:
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
