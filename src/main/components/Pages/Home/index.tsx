@@ -75,6 +75,7 @@ export const HomePage = () => {
                         convertProgress={appState.convertProgress}
                         fileName={appState.targetName}
                         targetType={appState.targetType}
+                        conversionError={appState.fileConvertError}
                     />
                 ),
                 description: "Step 4: Converting file...",

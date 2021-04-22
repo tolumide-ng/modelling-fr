@@ -62,7 +62,7 @@ export const useAppState = () => {
                 ssEvent.close();
             }
         };
-    });
+    }, [false]);
 
     const makeUploadFileRequest = async () => {
         const formData = new FormData();
@@ -102,7 +102,7 @@ export const useAppState = () => {
             // this is an intentional setTimeout to allow the user notice the file upload reached 100%
             setTimeout(() => {
                 changeScreen();
-            }, 1000);
+            }, 500);
         } catch (error) {
             let theError = error.message;
             if (theError === "Cannot read property 'fileName' of undefined") {
@@ -135,7 +135,12 @@ export const useAppState = () => {
         } catch (error) {}
     };
 
-    // NEXT FUNCTION MAKES THE EVENT SOURCE REQUEST TO THE API FOR THE CONVERT PROGRESS
+    const setConversionError = (error: string) => {
+        setAppState((theAppState) => ({
+            ...theAppState,
+            fileConvertError: error,
+        }));
+    };
 
     const streamConversion = async () => {
         try {
@@ -171,15 +176,13 @@ export const useAppState = () => {
             ssEvent.addEventListener(
                 "error",
                 () => {
+                    setConversionError(
+                        "There was a problem, converting your file, Try later"
+                    );
+
                     if (ssEvent) {
                         ssEvent.close();
                     }
-
-                    setAppState((theAppState) => ({
-                        ...theAppState,
-                        fileConvertError:
-                            "There was a problem, converting your file, Try later",
-                    }));
                 },
                 false
             );

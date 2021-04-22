@@ -7,6 +7,7 @@ interface ConvertProgressDef {
     convertProgress: number;
     fileName: string;
     targetType: string;
+    conversionError: string;
 }
 
 export const ConvertProgress = (props: ConvertProgressDef) => {
@@ -22,6 +23,7 @@ export const ConvertProgress = (props: ConvertProgressDef) => {
                         successText="Successful"
                         progressText={`Converting to ${props.targetType}`}
                         progressPercentage={props.convertProgress}
+                        displayError={props.conversionError}
                     />
                 </div>
             }
