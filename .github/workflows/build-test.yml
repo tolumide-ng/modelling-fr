@@ -11,36 +11,29 @@ jobs:
     strategy:
       matrix:
         node-version: [ 12.x ]
-    env:
-      NODE_ENV: test
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+      - name: Checking out of repo.
+        uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          check-latest: true
 
-    - name: Cache node modules
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
-      with:
-        # npm cache files are stored in `~/.npm` on Linux/macOS
-        path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+      - name: Get npm cache directory
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-
 
-    - name: Setup Nodejs environment
-      uses: actions/setup-node@v1.1.0
-      with:
-        node-version:  ${{ matrix.node-version }}
+      - name: Install all node modules
+        run: npm install
 
-    - name: Install all node modules
-      run: npm install
-
-    - name: Test
-      run: npm run test 
+      - name: Test
+        run: npm run test 
 
   deploy:
     name: Deploy the application
