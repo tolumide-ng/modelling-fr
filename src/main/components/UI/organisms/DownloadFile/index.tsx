@@ -5,10 +5,10 @@ import styles from "./index.module.css";
 
 interface DownloadFileDef {
     fileName: string;
+    handleFileDownload: () => void;
 }
 
 export const DownloadFile = (props: DownloadFileDef) => {
-    const handleFileDownLoad = () => {};
     return (
         <ConvertTemplate
             fileName={props.fileName}
@@ -18,7 +18,7 @@ export const DownloadFile = (props: DownloadFileDef) => {
                         buttonClass={styles.dwldButton}
                         buttonText="Download"
                         buttonType="button"
-                        handleClick={handleFileDownLoad}
+                        handleClick={props.handleFileDownload}
                     />
                 </div>
             }

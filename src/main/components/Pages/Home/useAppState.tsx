@@ -13,6 +13,7 @@ export interface ApplicationStateDef {
     fileConvertError: string;
     targetName: string;
     targetType: string;
+    downloadError: string;
 }
 
 interface Action {
@@ -35,6 +36,7 @@ export const useAppState = () => {
         fileConvertError: "",
         targetName: "",
         targetType: "",
+        downloadError: "",
     });
 
     const changeTheFile = (file: File) => {
@@ -60,7 +62,7 @@ export const useAppState = () => {
                 ssEvent.close();
             }
         };
-    });
+    }, [false]);
 
     const makeUploadFileRequest = async () => {
         const formData = new FormData();
@@ -90,18 +92,17 @@ export const useAppState = () => {
                 onUploadProgress: uploadConfig.onUploadProgress,
             });
 
-            const { fileName, fileId } = response?.data?.data;
+            const { fileId } = response?.data?.data;
 
             setAppState((theAppState) => ({
                 ...theAppState,
-                fileName,
                 fileId,
             }));
 
             // this is an intentional setTimeout to allow the user notice the file upload reached 100%
             setTimeout(() => {
                 changeScreen();
-            }, 1000);
+            }, 500);
         } catch (error) {
             let theError = error.message;
             if (theError === "Cannot read property 'fileName' of undefined") {
@@ -134,7 +135,12 @@ export const useAppState = () => {
         } catch (error) {}
     };
 
-    // NEXT FUNCTION MAKES THE EVENT SOURCE REQUEST TO THE API FOR THE CONVERT PROGRESS
+    const setConversionError = (error: string) => {
+        setAppState((theAppState) => ({
+            ...theAppState,
+            fileConvertError: error,
+        }));
+    };
 
     const streamConversion = async () => {
         try {
@@ -170,15 +176,13 @@ export const useAppState = () => {
             ssEvent.addEventListener(
                 "error",
                 () => {
+                    setConversionError(
+                        "There was a problem, converting your file, Try later"
+                    );
+
                     if (ssEvent) {
                         ssEvent.close();
                     }
-
-                    setAppState((theAppState) => ({
-                        ...theAppState,
-                        fileConvertError:
-                            "There was a problem, converting your file, Try later",
-                    }));
                 },
                 false
             );
@@ -195,6 +199,19 @@ export const useAppState = () => {
         } catch (error) {}
     };
 
+    const requestDownload = async () => {
+        try {
+            const response = await axiosCall({
+                path: `/download/${appState.fileId}`,
+                method: "GET",
+                payload: {},
+            });
+
+            const { convertedFile } = response?.data?.data;
+            window.open(convertedFile);
+        } catch (error) {}
+    };
+
     return {
         appState,
         setAppState,
@@ -203,5 +220,6 @@ export const useAppState = () => {
         changeScreen,
         handleTargetFormat,
         streamConversion,
+        requestDownload,
     };
 };

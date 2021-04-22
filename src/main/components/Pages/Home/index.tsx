@@ -20,6 +20,7 @@ export const HomePage = () => {
         makeUploadFileRequest,
         handleTargetFormat,
         streamConversion,
+        requestDownload,
     } = useAppState();
 
     React.useEffect(() => {
@@ -74,6 +75,7 @@ export const HomePage = () => {
                         convertProgress={appState.convertProgress}
                         fileName={appState.targetName}
                         targetType={appState.targetType}
+                        conversionError={appState.fileConvertError}
                     />
                 ),
                 description: "Step 4: Converting file...",
@@ -81,7 +83,12 @@ export const HomePage = () => {
         },
         5: () => {
             return {
-                component: <DownloadFile fileName={appState.targetName} />,
+                component: (
+                    <DownloadFile
+                        fileName={appState.targetName}
+                        handleFileDownload={requestDownload}
+                    />
+                ),
                 description: "Step 5: Download File",
             };
         },
