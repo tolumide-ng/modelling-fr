@@ -13,6 +13,7 @@ export interface ApplicationStateDef {
     fileConvertError: string;
     targetName: string;
     targetType: string;
+    downloadError: string;
 }
 
 interface Action {
@@ -35,6 +36,7 @@ export const useAppState = () => {
         fileConvertError: "",
         targetName: "",
         targetType: "",
+        downloadError: "",
     });
 
     const changeTheFile = (file: File) => {
@@ -90,11 +92,10 @@ export const useAppState = () => {
                 onUploadProgress: uploadConfig.onUploadProgress,
             });
 
-            const { fileName, fileId } = response?.data?.data;
+            const { fileId } = response?.data?.data;
 
             setAppState((theAppState) => ({
                 ...theAppState,
-                fileName,
                 fileId,
             }));
 
@@ -195,6 +196,19 @@ export const useAppState = () => {
         } catch (error) {}
     };
 
+    const requestDownload = async () => {
+        try {
+            const response = await axiosCall({
+                path: `/download/${appState.fileId}`,
+                method: "GET",
+                payload: {},
+            });
+
+            const { convertedFile } = response?.data?.data;
+            window.open(convertedFile);
+        } catch (error) {}
+    };
+
     return {
         appState,
         setAppState,
@@ -203,5 +217,6 @@ export const useAppState = () => {
         changeScreen,
         handleTargetFormat,
         streamConversion,
+        requestDownload,
     };
 };
