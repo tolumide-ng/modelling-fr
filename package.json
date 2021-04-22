@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --init",
-    "start": "serve -s dist",
+    "start": "npm run build && node server.js",
     "dev": "webpack-dev-server --hot --env.mode=development --open --port 5000",
     "build": "rm -rf ./dist && webpack --env.mode production",
     "test": "jest",
@@ -36,7 +36,6 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^9.0.3",
-    "serve": "^11.3.2",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^4.1.0"
   },
