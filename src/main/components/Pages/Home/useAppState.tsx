@@ -1,5 +1,5 @@
 import * as React from "react";
-import { axiosCall } from "../../../utilities/helpers/axiosCall";
+import { axiosCall } from "@utils/helpers/axiosCall";
 
 export interface ApplicationStateDef {
     fileName: string;

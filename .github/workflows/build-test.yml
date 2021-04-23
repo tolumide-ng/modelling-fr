@@ -1,0 +1,40 @@
+name: modelling
+on:
+  pull_request:
+  push:
+   branches:
+     - develop
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 12.x ]
+
+    steps:
+      - name: Checking out of repo.
+        uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          check-latest: true
+
+      - name: Get npm cache directory
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-
+
+      - name: Install all node modules
+        run: npm install
+
+      - name: Test
+        run: npm run test 
+
+
+
+      

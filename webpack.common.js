@@ -16,13 +16,32 @@ module.exports = {
 
     resolve: {
         extensions: [".tsx", ".ts", ".js", ".jsx"],
+        alias: {
+            "@atoms": path.resolve(__dirname, "src/main/components/UI/atoms/"),
+            "@molecules": path.resolve(
+                __dirname,
+                "src/main/components/UI/molecules/"
+            ),
+            "@organisms": path.resolve(
+                __dirname,
+                "src/main/components/UI/organisms/"
+            ),
+            "@templates": path.resolve(
+                __dirname,
+                "src/main/components/UI/templates/"
+            ),
+            "@pages": path.resolve(__dirname, "src/main/components/Pages/"),
+            "@store": path.resolve(__dirname, "src/main/store/"),
+            "@utils": path.resolve(__dirname, "src/main/utilities/"),
+            "@imgs": path.resolve(__dirname, "src/main/assets/images/"),
+            "@styles": path.resolve(__dirname, "src/main/assets/styles"),
+        },
     },
     plugins: [
         new Dotenv(),
         new HtmlWebpackPlugin({
             template: "./src/index.html",
             inject: "body",
-            // favicon: "./src/main/assets/imgs/fav.svg",
         }),
         new MiniCssExtractPlugin({
             filename: "app.css",

@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Button } from "../../atoms/Button";
-import { ConvertTemplate } from "../../template/ConvertTemplate";
+import { Button } from "@atoms/Button";
+import { ConvertTemplate } from "@templates/ConvertTemplate";
+import { targetTypesDef } from "@pages/Home/useAppState";
 import styles from "./index.module.css";
-import { targetTypesDef } from "../../../Pages/Home/useAppState";
 
 export const targetFormats: Array<targetTypesDef> = ["STEP", "STL", "IGES"];
 
