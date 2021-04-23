@@ -1,8 +1,7 @@
 import * as React from "react";
-import { confirmSize } from "../../../../utilities/helpers/files";
-import { ApplicationStateDef } from "../../../Pages/Home/useAppState";
-import { Button } from "../../atoms/Button";
-import { NeumorphLogo } from "../../molecules/NeumorphLogo";
+import { confirmSize } from "@utils/helpers/files";
+import { Button } from "@atoms/Button";
+import { NeumorphLogo } from "@molecules/NeumorphLogo";
 import styles from "./index.module.css";
 
 interface DropFileProps {

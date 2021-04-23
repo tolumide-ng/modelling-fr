@@ -1,6 +1,6 @@
 import * as React from "react";
-import { ConvertTemplate } from "../../template/ConvertTemplate";
-import { ProgressStatus } from "../ProgressStatus";
+import { ConvertTemplate } from "@templates/ConvertTemplate";
+import { ProgressStatus } from "@organisms/ProgressStatus";
 import styles from "./index.module.css";
 
 interface UploadFileDef {

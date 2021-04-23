@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, withRouter } from "react-router";
-import ErrorBoundary from "../../components/Pages/ErrorBoundary";
-import { HomePage } from "../../components/Pages/Home";
-import { LoadingPage } from "../../components/Pages/LoadingPage";
-import { NotFoundPage } from "../../components/Pages/NotFoundPage";
-import { setDropDownAction } from "../../store/modules/dropDown/actions";
-import { RootState } from "../../store/modules/types";
+import ErrorBoundary from "@pages/ErrorBoundary";
+import { HomePage } from "@pages/Home";
+import { LoadingPage } from "@pages/LoadingPage";
+import { NotFoundPage } from "@pages/NotFoundPage";
+import { setDropDownAction } from "@store/modules/dropDown/actions";
+import { RootState } from "@store/modules/types";
 import "./index.css";
 
 const AppRouter = withRouter(() => {

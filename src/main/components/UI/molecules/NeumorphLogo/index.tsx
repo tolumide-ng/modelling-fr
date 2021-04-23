@@ -1,5 +1,5 @@
 import * as React from "react";
-import neumorphLogo from "../../../../assets/images/neumorph.svg";
+import neumorphLogo from "@imgs/neumorph.svg";
 import styles from "./index.module.css";
 
 interface NeumorphLogoDef {

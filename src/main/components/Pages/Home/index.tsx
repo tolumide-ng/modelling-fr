@@ -1,10 +1,10 @@
 import * as React from "react";
-import { ConvertProgress } from "../../UI/organisms/ConvertProgress";
-import { DownloadFile } from "../../UI/organisms/DownloadFile";
-import { DropFile } from "../../UI/organisms/DropFile";
-import { SelectConversion } from "../../UI/organisms/SelectConversion";
-import { ShadowContainer } from "../../UI/organisms/ShadowContainer";
-import { UploadFile } from "../../UI/organisms/UploadFile";
+import { ConvertProgress } from "@organisms/ConvertProgress";
+import { DownloadFile } from "@organisms/DownloadFile";
+import { DropFile } from "@organisms/DropFile";
+import { SelectConversion } from "@organisms/SelectConversion";
+import { ShadowContainer } from "@organisms/ShadowContainer";
+import { UploadFile } from "@organisms/UploadFile";
 import { useAppState } from "./useAppState";
 import styles from "./index.module.css";
 

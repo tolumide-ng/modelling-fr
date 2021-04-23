@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Button } from "../../atoms/Button";
-import { ConvertTemplate } from "../../template/ConvertTemplate";
+import { Button } from "@atoms/Button";
+import { ConvertTemplate } from "@templates/ConvertTemplate";
 import styles from "./index.module.css";
 
 interface DownloadFileDef {
