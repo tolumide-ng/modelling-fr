@@ -208,7 +208,14 @@ export const useAppState = () => {
             });
 
             const { convertedFile } = response?.data?.data;
-            window.open(convertedFile);
+            // window.open(convertedFile);
+            let anchorTag: HTMLElementTagNameMap["a"] = document.createElement(
+                "a"
+            );
+            document.body.appendChild(anchorTag);
+            anchorTag.href = convertedFile;
+            anchorTag.click();
+            document.body.removeChild(anchorTag);
         } catch (error) {}
     };
 
