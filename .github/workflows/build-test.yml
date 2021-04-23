@@ -1,6 +1,5 @@
 name: modelling
 on:
-  pull_request:
   push:
    branches:
      - develop
