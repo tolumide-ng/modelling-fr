@@ -8,7 +8,6 @@
     border-radius: var(--app-br);
     padding: var(--shd-p);
     transition: all 0.3s ease-out;
-    display: table;
 }
 
 .shdContScreenOne:hover {
